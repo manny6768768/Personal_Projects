@@ -120,7 +120,7 @@ def homepage():
     @use_effect
     def load_news():
         async def task():
-            noticias = await fetch_news("https://newsapi.org/v2/top-headlines?country=us&apiKey=acff0de2016c429092e5f117d0efe904")
+            noticias = await fetch_news("https://newsapi.org/v2/top-headlines?country=us&apiKey=[Insert your api key available for free if you create your account in news api]")
             set_home_list(noticias)
         asyncio.create_task(task())
 
@@ -146,7 +146,7 @@ def SearchResults():
             set_search_list([])
             return
 
-        url = f"https://newsapi.org/v2/everything?q={query}&sortBy=popularity&apiKey=acff0de2016c429092e5f117d0efe904"
+        url = f"https://newsapi.org/v2/everything?q={query}&sortBy=popularity&apiKey=[Insert free key after creating account in news api]"
         noticias = await fetch_news(url)
         set_search_list(noticias)
         set_loading(False)
@@ -185,7 +185,7 @@ def Random_Article():
     @use_effect
     def get_news():
         async def task():
-            noticias = await fetch_news("https://newsapi.org/v2/everything?q=news&sortBy=publishedAt&pageSize=100&apiKey=acff0de2016c429092e5f117d0efe904")
+            noticias = await fetch_news("https://newsapi.org/v2/everything?q=news&sortBy=publishedAt&pageSize=100&apiKey=[Insert free key after creating account in news api]")
             if noticias:
                 set_articles(noticias)         
         asyncio.create_task(task())
@@ -238,7 +238,7 @@ def Past_Articles():
         set_loading(True)
         async with httpx.AsyncClient() as client:
             response = await client.get(
-                f"https://api.nytimes.com/svc/archive/v1/{year}/{month}.json?api-key=XB6ftwPfz6qSPs5kVZTKV9s79fRhQN4p"
+                f"https://api.nytimes.com/svc/archive/v1/{year}/{month}.json?api-key=[Insert free key after creating account in newsyork times developer]"
             )
             data = response.json()
             docs = data["response"]["docs"]
@@ -313,7 +313,7 @@ def Category_News(category):
     @use_effect
     def load_news():
         async def task():
-            noticias = await fetch_news(f"https://newsapi.org/v2/top-headlines?category={category}&apiKey=acff0de2016c429092e5f117d0efe904")
+            noticias = await fetch_news(f"https://newsapi.org/v2/top-headlines?category={category}&apiKey=[Insert free key after creating account in news api]")
             set_category_list(noticias)
         asyncio.create_task(task())
 
@@ -364,6 +364,7 @@ async def serve_css():
     return FileResponse(os.path.join(os.path.dirname(__file__), "styles.css"))
 
 configure(app, Main)
+
 
 
 
